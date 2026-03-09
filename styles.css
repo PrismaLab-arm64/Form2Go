@@ -7,8 +7,8 @@
   --text-muted: #6b7280;
   --border: #e5e7eb;
   --border-strong: #d1d5db;
-  --primary: #4ca742;
-  --primary-dark: #3f8e37;
+  --primary: #1f5eff;
+  --primary-dark: #1747c9;
   --danger: #dc2626;
 
   --shadow-soft: 0 8px 30px rgba(17, 24, 39, 0.07);
@@ -289,12 +289,12 @@ button {
 
 .btn--primary {
   color: #fff;
-  background: linear-gradient(180deg, #58b54d 0%, #4ca742 100%);
-  box-shadow: 0 10px 22px rgba(76, 167, 66, 0.28);
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+  box-shadow: 0 10px 22px rgba(31, 94, 255, 0.28);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(180deg, #5fbd53 0%, #46973d 100%);
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
 }
 
 @media (min-width: 480px) {
