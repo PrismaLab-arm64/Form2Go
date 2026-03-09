@@ -1,10 +1,10 @@
-const CACHE_NAME = "form2go-cache-v1";
+const CACHE_NAME = "form2go-cache-v2";
 
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./css/styles.css",
+  "./styles.css",
   "./js/app.js",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png"
@@ -35,9 +35,7 @@ self.addEventListener("fetch", (event) => {
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+      if (cachedResponse) return cachedResponse;
 
       return fetch(event.request)
         .then((networkResponse) => {
