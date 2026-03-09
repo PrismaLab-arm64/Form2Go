@@ -20,14 +20,15 @@ min-height:100vh;
 background:white;
 padding:40px;
 border-radius:20px;
-box-shadow:0 8px 30px rgba(0,0,0,0.1);
+box-shadow:0 10px 40px rgba(0,0,0,0.12);
 text-align:center;
+width:320px;
 
 }
 
 .logo{
 
-width:80px;
+width:90px;
 margin-bottom:10px;
 
 }
@@ -46,6 +47,26 @@ margin-top:20px;
 
 }
 
+header{
+
+text-align:center;
+margin-bottom:20px;
+
+}
+
+header img{
+
+width:50px;
+
+}
+
+form{
+
+width:320px;
+margin:auto;
+
+}
+
 input,textarea{
 
 width:100%;
@@ -53,6 +74,7 @@ padding:10px;
 margin:6px 0 12px 0;
 border-radius:8px;
 border:1px solid #ccc;
+font-size:14px;
 
 }
 
@@ -72,6 +94,7 @@ border-radius:8px;
 width:100%;
 font-weight:600;
 cursor:pointer;
+font-size:15px;
 
 }
 
@@ -81,22 +104,26 @@ opacity:.9;
 
 }
 
-header{
-
-text-align:center;
-
-}
-
-header img{
-
-width:40px;
-
-}
-
 .check{
 
 display:flex;
 align-items:center;
 gap:10px;
+margin-bottom:10px;
+
+}
+
+.form-message{
+
+min-height:20px;
+font-size:13px;
+color:#cc0000;
+margin-bottom:10px;
+
+}
+
+.form-message.is-success{
+
+color:#2e7d32;
 
 }
