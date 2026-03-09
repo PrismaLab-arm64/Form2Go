@@ -11,19 +11,18 @@
 
   <title>Form2Go</title>
 
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <main class="app-shell">
-    <!-- Pantalla de ingreso -->
     <section id="loginView" class="view view--active" aria-labelledby="loginTitle">
       <div class="screen screen--login">
         <div class="brand">
           <img
-            src="assets/icons/icon-512.png"
+            src="./assets/icons/icon-512.png"
             alt="Ícono de Form2Go"
             class="brand__icon"
           />
@@ -55,13 +54,12 @@
       </div>
     </section>
 
-    <!-- Pantalla principal del formulario -->
     <section id="formView" class="view" aria-labelledby="formTitle" hidden>
       <div class="screen screen--form">
         <header class="topbar">
           <div class="topbar__brand">
             <img
-              src="assets/icons/icon-192.png"
+              src="./assets/icons/icon-192.png"
               alt="Ícono de Form2Go"
               class="topbar__icon"
             />
@@ -199,7 +197,7 @@
     </section>
   </main>
 
-  <script src="js/app.js"></script>
+  <script src="./js/app.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", async () => {
