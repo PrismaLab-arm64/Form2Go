@@ -3,7 +3,8 @@
 Aplicación web progresiva (PWA) para **registro ágil de información en campo por Gestores SOAT**.
 
 Form2Go permite capturar datos de manera rápida desde un dispositivo móvil, generar automáticamente un archivo **CSV estructurado** y compartirlo con el asesor de oficina para su procesamiento.
-
+---
+https://prismalab-arm64.github.io/Form2Go/
 ---
 
 ## Objetivo
