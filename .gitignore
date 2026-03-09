@@ -1,0 +1,48 @@
+# =============================
+# FORM2GO - Git Ignore
+# =============================
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Editor folders
+.vscode/
+.idea/
+
+# Node (por si luego se usa)
+node_modules/
+
+# Build folders
+dist/
+build/
+
+# Cache
+.cache/
+*.cache
+
+# System files
+desktop.ini
+
+# Environment files
+.env
+.env.local
+
+# Coverage
+coverage/
+
+# Service worker dev
+sw.js.map
+
+# Optional screenshots
+screenshots/
