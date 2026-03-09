@@ -1,4 +1,4 @@
-const CACHE_NAME="form2go-cache-v2"
+const CACHE_NAME="form2go-cache-v5"
 
 const ASSETS=[
 
