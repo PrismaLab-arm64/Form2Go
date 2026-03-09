@@ -1,134 +1,121 @@
 <!DOCTYPE html>
 <html lang="es-CO">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form2Go</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#4ca742" />
+  <meta name="description" content="Registro ágil de campo para Gestores SOAT" />
 
-<title>Form2Go</title>
-
-<meta name="theme-color" content="#4ca742">
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="icon" href="assets/icons/icon-192.png">
-
-<link rel="stylesheet" href="styles.css">
-
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <main class="app-shell">
+    <!-- Vista de ingreso -->
+    <section id="loginView" class="view view--active">
+      <div class="screen screen--login">
+        <div class="brand">
+          <img src="assets/icons/icon-512.png" alt="Ícono de Form2Go" class="brand__icon" />
+          <h1 class="brand__title">Form2Go</h1>
+        </div>
 
-<div class="app">
+        <div class="card">
+          <form id="loginForm" class="stack">
+            <label for="codigoGestor" class="label">Código del gestor</label>
+            <input
+              type="text"
+              id="codigoGestor"
+              class="input"
+              placeholder="Ej. SK01"
+              maxlength="10"
+              required
+            />
+            <button type="submit" class="btn btn--primary">INGRESAR</button>
+          </form>
+        </div>
 
-<!-- LOGIN -->
+        <p class="caption">Registro ágil de campo</p>
+      </div>
+    </section>
 
-<section id="loginView">
+    <!-- Vista formulario -->
+    <section id="formView" class="view" style="display:none;">
+      <div class="screen screen--form">
+        <header class="hero">
+          <div class="hero__brand">
+            <img src="assets/icons/icon-192.png" alt="Ícono de Form2Go" class="hero__icon" />
+            <div>
+              <h2 class="hero__title">Form2Go</h2>
+              <p class="hero__subtitle">Gestor: <span id="gestorActivo"></span></p>
+            </div>
+          </div>
+        </header>
 
-<div class="login-card">
+        <div class="card card--form">
+          <form id="recordForm" class="stack">
+            <div class="field">
+              <label for="nombrePaciente" class="label">Nombre del paciente</label>
+              <input type="text" id="nombrePaciente" class="input" required />
+            </div>
 
-<img src="assets/icons/icon-512.png" class="logo">
+            <div class="field">
+              <label for="fechaAccidente" class="label">Fecha del accidente</label>
+              <input type="date" id="fechaAccidente" class="input" required />
+            </div>
 
-<h1>Form2Go</h1>
+            <div class="field">
+              <label for="companiaSoat" class="label">Nombre compañía SOAT</label>
+              <input type="text" id="companiaSoat" class="input" />
+            </div>
 
-<form id="loginForm">
+            <div class="field">
+              <label for="nombreEps" class="label">Nombre EPS</label>
+              <input type="text" id="nombreEps" class="input" />
+            </div>
 
-<input
-type="text"
-id="codigoGestor"
-placeholder="Código del gestor"
-required
->
+            <div class="field">
+              <label for="celular" class="label">Celular</label>
+              <input type="tel" id="celular" class="input" maxlength="10" required />
+            </div>
 
-<button type="submit">
-INGRESAR
-</button>
+            <div class="field">
+              <label for="confirmarCelular" class="label">Confirmar celular</label>
+              <input type="tel" id="confirmarCelular" class="input" maxlength="10" required />
+            </div>
 
-</form>
+            <div class="field">
+              <label for="diagnostico" class="label">Diagnóstico</label>
+              <textarea id="diagnostico" class="textarea"></textarea>
+            </div>
 
-<p class="subtitle">
-Registro ágil de campo
-</p>
+            <div class="field">
+              <label for="hechos" class="label">Hechos</label>
+              <textarea id="hechos" class="textarea"></textarea>
+            </div>
 
-</div>
+            <label class="check">
+              <input type="checkbox" id="confirmacionTelefono" />
+              <span>Confirmo que verifiqué el número antes de enviar</span>
+            </label>
 
-</section>
+            <p id="formMessage" class="form-message"></p>
 
+            <button type="submit" class="btn btn--primary">ENVIAR</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<!-- FORMULARIO -->
-
-<section id="formView" style="display:none">
-
-<header>
-
-<img src="assets/icons/icon-192.png">
-
-<h2>Form2Go</h2>
-
-<p>
-Gestor: <span id="gestorActivo"></span>
-</p>
-
-</header>
-
-<form id="recordForm">
-
-<label>Nombre del paciente</label>
-<input type="text" id="nombrePaciente" required>
-
-<label>Fecha del accidente</label>
-<input type="date" id="fechaAccidente" required>
-
-<label>Nombre compañía SOAT</label>
-<input type="text" id="companiaSoat">
-
-<label>Nombre EPS</label>
-<input type="text" id="nombreEps">
-
-<label>Celular</label>
-<input type="tel" id="celular" maxlength="10" required>
-
-<label>Confirmar celular</label>
-<input type="tel" id="confirmarCelular" maxlength="10" required>
-
-<label>Diagnóstico</label>
-<textarea id="diagnostico"></textarea>
-
-<label>Hechos</label>
-<textarea id="hechos"></textarea>
-
-<label class="check">
-
-<input type="checkbox" id="confirmacionTelefono">
-
-Confirmo que verifiqué el número antes de enviar
-
-</label>
-
-<p id="formMessage" class="form-message"></p>
-
-<button type="submit">
-ENVIAR
-</button>
-
-</form>
-
-</section>
-
-</div>
-
-<script src="js/app.js"></script>
-
-<script>
-
-if("serviceWorker" in navigator){
-
-navigator.serviceWorker.register("service-worker.js")
-
-}
-
-</script>
-
+  <script src="js/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
 </body>
 </html>
