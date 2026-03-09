@@ -1,214 +1,121 @@
 <!DOCTYPE html>
 <html lang="es-CO">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#4ca742" />
-  <meta name="description" content="Registro ágil de campo para Gestores SOAT" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Form2Go" />
 
-  <title>Form2Go</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
-  <link rel="stylesheet" href="./styles.css" />
+<title>Form2Go</title>
+
+<meta name="theme-color" content="#4ca742">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="icon" href="assets/icons/icon-192.png">
+
+<link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
-  <main class="app-shell">
-    <section id="loginView" class="view view--active" aria-labelledby="loginTitle">
-      <div class="screen screen--login">
-        <div class="brand">
-          <img
-            src="./assets/icons/icon-512.png"
-            alt="Ícono de Form2Go"
-            class="brand__icon"
-          />
-          <h1 id="loginTitle" class="brand__title">Form2Go</h1>
-        </div>
 
-        <div class="card">
-          <form id="loginForm" novalidate>
-            <label for="codigoGestor" class="form-label">Código del gestor</label>
-            <input
-              type="text"
-              id="codigoGestor"
-              name="codigoGestor"
-              class="form-input"
-              placeholder="Ej. SK01"
-              maxlength="10"
-              autocapitalize="characters"
-              autocomplete="off"
-              required
-            />
+<div class="app">
 
-            <button type="submit" class="btn btn--primary btn--full">
-              INGRESAR
-            </button>
-          </form>
-        </div>
+<!-- LOGIN -->
 
-        <p class="screen__caption">Registro ágil de campo</p>
-      </div>
-    </section>
+<section id="loginView">
 
-    <section id="formView" class="view" aria-labelledby="formTitle" hidden>
-      <div class="screen screen--form">
-        <header class="topbar">
-          <div class="topbar__brand">
-            <img
-              src="./assets/icons/icon-192.png"
-              alt="Ícono de Form2Go"
-              class="topbar__icon"
-            />
-            <div>
-              <h2 id="formTitle" class="topbar__title">Form2Go</h2>
-              <p class="topbar__subtitle">Gestor: <span id="gestorActivo">-</span></p>
-            </div>
-          </div>
-        </header>
+<div class="login-card">
 
-        <div class="card">
-          <form id="recordForm" novalidate>
-            <div class="field-group">
-              <label for="nombrePaciente" class="form-label">Nombre del paciente</label>
-              <input
-                type="text"
-                id="nombrePaciente"
-                name="nombrePaciente"
-                class="form-input"
-                maxlength="120"
-                autocomplete="off"
-                required
-              />
-            </div>
+<img src="assets/icons/icon-512.png" class="logo">
 
-            <div class="field-group">
-              <label for="fechaAccidente" class="form-label">Fecha del accidente</label>
-              <input
-                type="date"
-                id="fechaAccidente"
-                name="fechaAccidente"
-                class="form-input"
-                required
-              />
-            </div>
+<h1>Form2Go</h1>
 
-            <div class="field-group">
-              <label for="companiaSoat" class="form-label">Nombre compañía SOAT</label>
-              <input
-                type="text"
-                id="companiaSoat"
-                name="companiaSoat"
-                class="form-input"
-                maxlength="120"
-                autocomplete="off"
-              />
-            </div>
+<form id="loginForm">
 
-            <div class="field-group">
-              <label for="nombreEps" class="form-label">Nombre EPS</label>
-              <input
-                type="text"
-                id="nombreEps"
-                name="nombreEps"
-                class="form-input"
-                maxlength="120"
-                autocomplete="off"
-              />
-            </div>
+<input
+type="text"
+id="codigoGestor"
+placeholder="Código del gestor"
+required
+>
 
-            <div class="field-group">
-              <label for="celular" class="form-label">Celular</label>
-              <input
-                type="tel"
-                id="celular"
-                name="celular"
-                class="form-input"
-                inputmode="numeric"
-                maxlength="10"
-                pattern="[0-9]{10}"
-                placeholder="Ej. 3001234567"
-                autocomplete="off"
-                required
-              />
-            </div>
+<button type="submit">INGRESAR</button>
 
-            <div class="field-group">
-              <label for="confirmarCelular" class="form-label">Confirmar celular</label>
-              <input
-                type="tel"
-                id="confirmarCelular"
-                name="confirmarCelular"
-                class="form-input"
-                inputmode="numeric"
-                maxlength="10"
-                pattern="[0-9]{10}"
-                placeholder="Repita el número"
-                autocomplete="off"
-                required
-              />
-            </div>
+</form>
 
-            <div class="field-group">
-              <label for="diagnostico" class="form-label">Diagnóstico</label>
-              <textarea
-                id="diagnostico"
-                name="diagnostico"
-                class="form-textarea"
-                rows="4"
-                maxlength="50000"
-              ></textarea>
-            </div>
+<p class="subtitle">Registro ágil de campo</p>
 
-            <div class="field-group">
-              <label for="hechos" class="form-label">Hechos</label>
-              <textarea
-                id="hechos"
-                name="hechos"
-                class="form-textarea"
-                rows="5"
-                maxlength="50000"
-              ></textarea>
-            </div>
+</div>
 
-            <div class="checkbox-group">
-              <input
-                type="checkbox"
-                id="confirmacionTelefono"
-                name="confirmacionTelefono"
-                required
-              />
-              <label for="confirmacionTelefono">
-                Confirmo que verifiqué el número de teléfono antes de enviar.
-              </label>
-            </div>
+</section>
 
-            <p id="formMessage" class="form-message" aria-live="polite"></p>
 
-            <button type="submit" class="btn btn--primary btn--full">
-              ENVIAR
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
+<!-- FORMULARIO -->
 
-  <script src="./js/app.js"></script>
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", async () => {
-        try {
-          await navigator.serviceWorker.register("./service-worker.js");
-          console.log("Service Worker registrado correctamente.");
-        } catch (error) {
-          console.error("Error al registrar el Service Worker:", error);
-        }
-      });
-    }
-  </script>
+<section id="formView" style="display:none">
+
+<header>
+
+<img src="assets/icons/icon-192.png">
+
+<h2>Form2Go</h2>
+
+<p>Gestor: <span id="gestorActivo"></span></p>
+
+</header>
+
+<form id="recordForm">
+
+<label>Nombre del paciente</label>
+<input type="text" id="nombrePaciente" required>
+
+<label>Fecha del accidente</label>
+<input type="date" id="fechaAccidente" required>
+
+<label>Nombre compañía SOAT</label>
+<input type="text" id="companiaSoat">
+
+<label>Nombre EPS</label>
+<input type="text" id="nombreEps">
+
+<label>Celular</label>
+<input type="tel" id="celular" maxlength="10" required>
+
+<label>Confirmar celular</label>
+<input type="tel" id="confirmarCelular" maxlength="10" required>
+
+<label>Diagnóstico</label>
+<textarea id="diagnostico"></textarea>
+
+<label>Hechos</label>
+<textarea id="hechos"></textarea>
+
+<label class="check">
+<input type="checkbox" id="confirmacionTelefono">
+Confirmo que verifiqué el número antes de enviar
+</label>
+
+<button type="submit">ENVIAR</button>
+
+</form>
+
+</section>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("service-worker.js")
+
+}
+
+</script>
+
 </body>
 </html>
