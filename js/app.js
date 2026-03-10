@@ -6,6 +6,7 @@ const formView = document.getElementById("formView");
 const gestorInput = document.getElementById("codigoGestor");
 const gestorActivo = document.getElementById("gestorActivo");
 const installBtn = document.getElementById("installBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 const nombrePaciente = document.getElementById("nombrePaciente");
 const fechaAccidente = document.getElementById("fechaAccidente");
@@ -20,11 +21,11 @@ const formMessage = document.getElementById("formMessage");
 
 const STORAGE_GESTOR = "form2go_gestor";
 const STORAGE_DRAFT = "form2go_draft";
-
 let deferredInstallPrompt = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  restaurarSesion();
+  mostrarVistaLogin();
+  restaurarCodigoGestor();
   restaurarBorrador();
   registrarEventosDeAutoguardado();
   registrarInstalacionPwa();
@@ -45,14 +46,18 @@ loginForm.addEventListener("submit", (event) => {
   iniciarSesion(codigo);
 });
 
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    cerrarSesion();
+  });
+}
+
 recordForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   limpiarMensaje();
   limpiarEstadosInvalidos();
 
-  if (!validarFormulario()) {
-    return;
-  }
+  if (!validarFormulario()) return;
 
   const gestor = (localStorage.getItem(STORAGE_GESTOR) || "GESTOR").trim().toUpperCase();
   const registro = construirRegistro();
@@ -76,10 +81,7 @@ recordForm.addEventListener("submit", async (event) => {
   bloquearBotonEnvio(true);
 
   try {
-    const resultado = await compartirORespaldar({
-      csvFile,
-      tsvFile
-    });
+    const resultado = await compartirORespaldar({ csvFile, tsvFile });
 
     if (resultado.ok) {
       mostrarExito(resultado.message);
@@ -95,23 +97,39 @@ recordForm.addEventListener("submit", async (event) => {
   }
 });
 
-function restaurarSesion() {
+function mostrarVistaLogin() {
+  loginView.hidden = false;
+  loginView.style.display = "block";
+  formView.hidden = true;
+  formView.style.display = "none";
+}
+
+function mostrarVistaFormulario() {
+  loginView.hidden = true;
+  loginView.style.display = "none";
+  formView.hidden = false;
+  formView.style.display = "block";
+}
+
+function restaurarCodigoGestor() {
   const gestorGuardado = localStorage.getItem(STORAGE_GESTOR);
-
-  if (!gestorGuardado) return;
-
-  gestorInput.value = gestorGuardado;
-  iniciarSesion(gestorGuardado);
+  if (gestorGuardado) {
+    gestorInput.value = gestorGuardado;
+  }
 }
 
 function iniciarSesion(codigo) {
   if (gestorActivo) {
     gestorActivo.textContent = codigo;
   }
+  mostrarVistaFormulario();
+}
 
-  loginView.style.display = "none";
-  formView.style.display = "block";
-  formView.hidden = false;
+function cerrarSesion() {
+  localStorage.removeItem(STORAGE_GESTOR);
+  gestorInput.value = "";
+  mostrarVistaLogin();
+  gestorInput.focus();
 }
 
 function registrarInstalacionPwa() {
@@ -410,7 +428,6 @@ async function compartirORespaldar({ csvFile, tsvFile }) {
 function descargarArchivo(file) {
   const url = URL.createObjectURL(file);
   const enlace = document.createElement("a");
-
   enlace.href = url;
   enlace.download = file.name;
   enlace.style.display = "none";
