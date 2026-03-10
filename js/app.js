@@ -5,6 +5,7 @@ const formView = document.getElementById("formView");
 
 const gestorInput = document.getElementById("codigoGestor");
 const gestorActivo = document.getElementById("gestorActivo");
+const installBtn = document.getElementById("installBtn");
 
 const nombrePaciente = document.getElementById("nombrePaciente");
 const fechaAccidente = document.getElementById("fechaAccidente");
@@ -20,10 +21,13 @@ const formMessage = document.getElementById("formMessage");
 const STORAGE_GESTOR = "form2go_gestor";
 const STORAGE_DRAFT = "form2go_draft";
 
+let deferredInstallPrompt = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   restaurarSesion();
   restaurarBorrador();
   registrarEventosDeAutoguardado();
+  registrarInstalacionPwa();
 });
 
 loginForm.addEventListener("submit", (event) => {
@@ -57,8 +61,17 @@ recordForm.addEventListener("submit", async (event) => {
   const csvContent = convertirRegistroACSV(registro);
   const tsvContent = convertirRegistroATSV(registro);
 
-  const csvFile = crearArchivoPlano(csvContent, `${gestor}_${timestamp}.csv`, "text/csv;charset=utf-8;");
-  const tsvFile = crearArchivoPlano(tsvContent, `${gestor}_${timestamp}.tsv`, "text/tab-separated-values;charset=utf-8;");
+  const csvFile = crearArchivoPlano(
+    csvContent,
+    `${gestor}_${timestamp}.csv`,
+    "text/csv;charset=utf-8;"
+  );
+
+  const tsvFile = crearArchivoPlano(
+    tsvContent,
+    `${gestor}_${timestamp}.tsv`,
+    "text/tab-separated-values;charset=utf-8;"
+  );
 
   bloquearBotonEnvio(true);
 
@@ -101,6 +114,39 @@ function iniciarSesion(codigo) {
   formView.hidden = false;
 }
 
+function registrarInstalacionPwa() {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+
+    if (installBtn) {
+      installBtn.hidden = false;
+    }
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+
+      deferredInstallPrompt.prompt();
+      const choice = await deferredInstallPrompt.userChoice;
+
+      if (choice.outcome === "accepted") {
+        installBtn.hidden = true;
+      }
+
+      deferredInstallPrompt = null;
+    });
+  }
+
+  window.addEventListener("appinstalled", () => {
+    if (installBtn) {
+      installBtn.hidden = true;
+    }
+    deferredInstallPrompt = null;
+  });
+}
+
 function registrarEventosDeAutoguardado() {
   const campos = [
     nombrePaciente,
@@ -122,9 +168,6 @@ function registrarEventosDeAutoguardado() {
     campo.addEventListener(evento, () => {
       if (campo === celular || campo === confirmarCelular) {
         normalizarTelefono(campo);
-      }
-
-      if (campo === celular || campo === confirmarCelular) {
         validarTelefonosEnVivo();
       }
 
@@ -135,6 +178,7 @@ function registrarEventosDeAutoguardado() {
   });
 
   window.addEventListener("beforeunload", guardarBorrador);
+
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       guardarBorrador();
@@ -309,15 +353,15 @@ async function compartirORespaldar({ csvFile, tsvFile }) {
   const soportaCanShare = typeof navigator !== "undefined" && typeof navigator.canShare === "function";
 
   if (soportaShare && soportaCanShare) {
-    const shareData = {
+    const shareDataArchivo = {
       title: "Registro Form2Go",
       text: "Registro generado desde Form2Go.",
       files: [csvFile]
     };
 
-    if (navigator.canShare(shareData)) {
+    if (navigator.canShare(shareDataArchivo)) {
       try {
-        await navigator.share(shareData);
+        await navigator.share(shareDataArchivo);
         return {
           ok: true,
           message: "Registro compartido correctamente."
@@ -329,13 +373,6 @@ async function compartirORespaldar({ csvFile, tsvFile }) {
             message: "El envío fue cancelado. El formulario conserva los datos."
           };
         }
-
-        descargarArchivo(csvFile);
-
-        return {
-          ok: true,
-          message: "No fue posible compartir directamente. Se descargó el CSV como respaldo."
-        };
       }
     }
   }
@@ -343,9 +380,30 @@ async function compartirORespaldar({ csvFile, tsvFile }) {
   descargarArchivo(csvFile);
   descargarArchivo(tsvFile);
 
+  if (soportaShare) {
+    try {
+      await navigator.share({
+        title: "Registro Form2Go",
+        text: "No fue posible compartir el archivo directamente. El CSV y el TSV se descargaron en la carpeta Descargas del dispositivo. Adjunte el archivo manualmente en WhatsApp."
+      });
+
+      return {
+        ok: true,
+        message: "Se descargaron los archivos y se abrió la hoja de compartir para continuar por WhatsApp."
+      };
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        return {
+          ok: false,
+          message: "Se descargaron los archivos, pero se canceló la acción de compartir."
+        };
+      }
+    }
+  }
+
   return {
     ok: true,
-    message: "Este dispositivo no admite compartir archivos directamente. Se descargaron CSV y TSV como respaldo."
+    message: "Este dispositivo no admite compartir archivos directamente. Se descargaron CSV y TSV como respaldo en Descargas."
   };
 }
 
