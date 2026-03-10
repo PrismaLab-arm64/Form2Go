@@ -1,6 +1,7 @@
 :root {
   --bg: #f3f4f6;
-  --surface: #ffffff;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-solid: #ffffff;
   --text: #374151;
   --text-strong: #111827;
   --text-muted: #6b7280;
@@ -14,7 +15,8 @@
   --radius-xl: 28px;
   --radius-lg: 22px;
   --radius-md: 16px;
-  --max-width: 460px;
+  --max-width-login: 460px;
+  --max-width-form: 540px;
   --transition: 180ms ease;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -70,17 +72,13 @@ button {
   width: 100%;
 }
 
-.view--active {
-  display: block;
-}
-
 .screen {
   width: 100%;
-  max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .screen--login {
+  max-width: var(--max-width-login);
   min-height: calc(100vh - 52px);
   display: flex;
   flex-direction: column;
@@ -89,6 +87,7 @@ button {
 }
 
 .screen--form {
+  max-width: var(--max-width-form);
   padding-top: 8px;
   padding-bottom: 18px;
 }
@@ -129,7 +128,7 @@ button {
 
 .card {
   width: 100%;
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--surface);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(229, 231, 235, 0.9);
   border-radius: var(--radius-xl);
@@ -139,11 +138,6 @@ button {
 
 .topbar {
   margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 
 .topbar__brand {
@@ -153,12 +147,13 @@ button {
 }
 
 .topbar__icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   object-fit: contain;
   background: #fff;
   box-shadow: var(--shadow-soft);
+  flex: 0 0 auto;
 }
 
 .topbar__title {
@@ -176,6 +171,8 @@ button {
 }
 
 .topbar__logout {
+  margin-top: 12px;
+  width: 100%;
   min-height: 48px;
   padding: 10px 14px;
   font-size: 0.84rem;
@@ -207,7 +204,7 @@ button {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 16px;
-  background: var(--surface);
+  background: var(--surface-solid);
   color: var(--text-strong);
   padding: 14px 16px;
   outline: none;
@@ -363,10 +360,6 @@ button {
   .card {
     padding: 24px 22px;
   }
-
-  .screen--login {
-    gap: 24px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -374,8 +367,12 @@ button {
     padding: 32px 24px 36px;
   }
 
-  .screen {
-    max-width: 560px;
+  .screen--login {
+    max-width: 500px;
+  }
+
+  .screen--form {
+    max-width: 620px;
   }
 
   .brand__icon {
@@ -404,15 +401,23 @@ button {
   .form-textarea {
     font-size: 1rem;
   }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .topbar__logout {
+    margin-top: 0;
+    width: auto;
+  }
 }
 
 @media (min-width: 1024px) {
-  .screen {
-    max-width: 620px;
-  }
-
   .screen--form {
-    padding-top: 18px;
+    max-width: 680px;
   }
 
   .card {
