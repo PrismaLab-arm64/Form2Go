@@ -47,23 +47,20 @@ Form2Go está diseñada para:
 ## Estructura del proyecto
 
 
-Form2Go
-│
-├─ assets
-│ └─ icons
-│ ├─ icon-192.png
-│ └─ icon-512.png
-│
-├─ js
-│ └─ app.js
-│
-├─ index.html
-├─ styles.css
-├─ manifest.json
-├─ service-worker.js
-├─ README.md
-└─ .gitignore
-
+Form2Go/
+├── assets/
+│   └── icons/
+│       ├── icon-192.png
+│       └── icon-512.png
+├── css/
+│   └── styles.css
+├── js/
+│   └── app.js
+├── index.html
+├── manifest.json
+├── service-worker.js
+├── README.md
+└── .gitignore
 
 ---
 
