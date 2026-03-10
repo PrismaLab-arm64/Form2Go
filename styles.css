@@ -326,6 +326,17 @@ button {
   background: linear-gradient(180deg, #5fbd53 0%, #46973d 100%);
 }
 
+.btn--secondary {
+  color: var(--text-strong);
+  background: #ffffff;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn--secondary:hover {
+  background: #f9fafb;
+}
+
 .btn--full {
   width: 100%;
 }
