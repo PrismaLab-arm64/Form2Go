@@ -21,6 +21,7 @@ const formMessage = document.getElementById("formMessage");
 
 const STORAGE_GESTOR = "form2go_gestor";
 const STORAGE_DRAFT = "form2go_draft";
+
 let deferredInstallPrompt = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -57,7 +58,9 @@ recordForm.addEventListener("submit", async (event) => {
   limpiarMensaje();
   limpiarEstadosInvalidos();
 
-  if (!validarFormulario()) return;
+  if (!validarFormulario()) {
+    return;
+  }
 
   const gestor = (localStorage.getItem(STORAGE_GESTOR) || "GESTOR").trim().toUpperCase();
   const registro = construirRegistro();
@@ -122,6 +125,7 @@ function iniciarSesion(codigo) {
   if (gestorActivo) {
     gestorActivo.textContent = codigo;
   }
+
   mostrarVistaFormulario();
 }
 
@@ -428,6 +432,7 @@ async function compartirORespaldar({ csvFile, tsvFile }) {
 function descargarArchivo(file) {
   const url = URL.createObjectURL(file);
   const enlace = document.createElement("a");
+
   enlace.href = url;
   enlace.download = file.name;
   enlace.style.display = "none";
