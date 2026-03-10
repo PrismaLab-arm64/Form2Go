@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#4ca742" />
   <meta name="description" content="Registro ágil de campo para Gestores SOAT" />
-
   <title>Form2Go</title>
 
   <link rel="manifest" href="manifest.json" />
@@ -47,7 +46,7 @@
           </form>
         </div>
 
-        <p class="screen__caption">Registro ágil de campo</p>
+        <p class="screen__caption">Sistema de registro y gestión</p>
       </div>
     </section>
 
@@ -66,6 +65,10 @@
               <p class="topbar__subtitle">Gestor: <span id="gestorActivo">-</span></p>
             </div>
           </div>
+
+          <button type="button" id="logoutBtn" class="btn btn--secondary topbar__logout">
+            CAMBIAR GESTOR
+          </button>
         </header>
 
         <div class="card">
@@ -119,7 +122,7 @@
             </div>
 
             <div class="field-group">
-              <label for="celular" class="form-label">Celular</label>
+              <label for="celular" class="form-label">Número celular</label>
               <input
                 type="tel"
                 id="celular"
@@ -135,7 +138,7 @@
             </div>
 
             <div class="field-group">
-              <label for="confirmarCelular" class="form-label">Confirmar celular</label>
+              <label for="confirmarCelular" class="form-label">Confirmar número celular</label>
               <input
                 type="tel"
                 id="confirmarCelular"
