@@ -15,6 +15,7 @@
   --radius-xl: 28px;
   --radius-lg: 22px;
   --radius-md: 16px;
+  --radius-sm: 12px;
   --max-width-login: 460px;
   --max-width-form: 540px;
   --transition: 180ms ease;
@@ -101,15 +102,15 @@ button {
 }
 
 .brand__icon {
-  width: 110px;
-  height: 110px;
+  width: 108px;
+  height: 108px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(17, 24, 39, 0.06));
 }
 
 .brand__title {
   margin: 0;
-  font-size: clamp(2.4rem, 6vw, 3.2rem);
+  font-size: clamp(2.35rem, 6vw, 3.15rem);
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 600;
@@ -147,26 +148,30 @@ button {
 }
 
 .topbar__icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
   object-fit: contain;
   background: #fff;
   box-shadow: var(--shadow-soft);
   flex: 0 0 auto;
 }
 
+.topbar__text {
+  min-width: 0;
+}
+
 .topbar__title {
   margin: 0 0 2px;
-  font-size: 1.45rem;
-  line-height: 1.1;
+  font-size: 1.4rem;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--text-strong);
 }
 
 .topbar__subtitle {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--text-muted);
 }
 
@@ -175,7 +180,7 @@ button {
   width: 100%;
   min-height: 48px;
   padding: 10px 14px;
-  font-size: 0.84rem;
+  font-size: 0.82rem;
 }
 
 .login-form,
@@ -193,7 +198,7 @@ button {
 
 .form-label {
   display: inline-block;
-  font-size: 1.02rem;
+  font-size: 1.01rem;
   font-weight: 500;
   color: var(--text);
   letter-spacing: -0.02em;
@@ -376,12 +381,12 @@ button {
   }
 
   .brand__icon {
-    width: 120px;
-    height: 120px;
+    width: 118px;
+    height: 118px;
   }
 
   .brand__title {
-    font-size: 3.3rem;
+    font-size: 3.2rem;
   }
 
   .card {
